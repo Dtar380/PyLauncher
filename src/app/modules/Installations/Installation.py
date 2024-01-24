@@ -31,7 +31,7 @@ class Installation:
             'username': username, # Gets the username
             'uuid': uuid, # Gets the uuid
 
-            "launcherVersion": "0.1", # Sets the launcher version
+            "launcherVersion": "0.1.1", # Sets the launcher version
             "gameDirectory": self.gameDir, # Sets the files path
             "jvmArguments": [f'-Xmx{self.MaxRamArg}G','-Xms1G'], # Sets max and min RAM
             "disableMultiplayer": False # Enables the multiplayer

@@ -7,6 +7,7 @@ from time import sleep
 from subprocess import Popen
 from os import system as execute
 from platform import system as sys
+from urllib import error, request
 
 ########################################
 #####  System Functions            #####
@@ -25,6 +26,15 @@ class SystemFunctions:
             print('\nSystem not compatible\n\n Exiting program')
             sleep(1)
             exit()
+
+    # Checks if user has internet connection
+    def get_internetConnection(self):
+        try:
+            request.urlopen('https://www.google.com', timeout=1) # Tries connecting to the google servers
+            return True # Returns True
+        
+        except error.URLError: # Except user has no connection
+            return False # Returns False
 
     # Clear the consol after specified time
     def clear(self, time = 1):

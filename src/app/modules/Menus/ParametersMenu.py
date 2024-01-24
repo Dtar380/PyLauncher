@@ -139,16 +139,16 @@ class InstallationParameters:
 
     # Defines get_versionId function
     def get_versionId(self):
-        if self.mc_loader == 0: # Checks if the mc_loader is 0
+        if self.mc_loader == 0 or self.mc_loader == 4: # Checks if the mc_loader is 0 or 4
             versionId = self.version_to_install # Creates the value for versionId to match the file of the version isntalled
 
-        if self.mc_loader == 1: # Checks if the mc_loader is 0
+        if self.mc_loader == 1: # Checks if the mc_loader is 1
             versionId = f'{self.version_to_install.split('-')[0]}-forge-{self.version_to_install.split('-')[1]}' # Creates the value for versionId to match the file of the version isntalled
 
-        if self.mc_loader == 2: # Checks if the mc_loader is 0
+        if self.mc_loader == 2: # Checks if the mc_loader is 2
             versionId = f"fabric-loader-{fabric.get_latest_loader_version()}-{self.version_to_install}" # Creates the value for versionId to match the file of the version isntalled
 
-        if self.mc_loader == 3: # Checks if the mc_loader is 0
+        if self.mc_loader == 3: # Checks if the mc_loader is 3
             versionId = f"quilt-loader-{quilt.get_latest_loader_version()}-{self.version_to_install}" # Creates the value for versionId to match the file of the version isntalled
 
         return versionId # Returns versionId value

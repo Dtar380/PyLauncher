@@ -6,6 +6,7 @@
 from subprocess import run
 from os import chdir
 from os.path import join
+from time import sleep
 
 ##### Internal modules             #####
 from modules.Menus.Menus import Menus
@@ -37,7 +38,8 @@ menus = {
         'Vanilla',
         'Forge',
         'Fabric',
-        'Quilt'
+        'Quilt',
+        'Installed'
     ],
     "installation": [
         'Execute Installation',
@@ -52,7 +54,7 @@ menus = {
 ########################################
 
 if __name__ == "__main__":
-    chdir(launcher_path)
-    Menu = Menus(menus, instfile, usfile)
-    while True:
-        Menu.mainMenu()
+    chdir(launcher_path) # Moves the working directory to the launcher_path
+    Menu = Menus(menus, instfile, usfile) # Creates all the menus
+    while True: # Infinite loop
+        Menu.mainMenu() # Executes the mainMenu from the Menu object

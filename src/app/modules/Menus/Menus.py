@@ -27,18 +27,17 @@ from modules.constants import launcher_path
 class Menus:
     
     def __init__(self, menus, instfile, usfile):
-        self.instfile = instfile
-        self.usfile = usfile
+        self.instfile = instfile # Gets the installations file path
+        self.usfile = usfile # Gets the users file path
         self.menu_list = {}
         for i in menus: # Iterates in a dictionary qith menus and actions
-            
             # Creates a dictionarie of menus attached to a MenuManager object with their actions
             self.menu_list[f'{i}_menu'] = MenuManager(menus[i])
-
+            
     # Main Menu
     def mainMenu(self):
         # Runs the main_menu object print_menu method and gets the returned index
-        index = self.menu_list['main_menu'].print_menu('PyLauncher v0.1\n\nSelect an option:\n')
+        index = self.menu_list['main_menu'].print_menu('PyLauncher v0.1.1\nSelect an option:\n')
         menu_actions = [ # Creates a list with the actions to perform acording to index
             self.usersMenu, # Calls userMenu function
             self.executeMenu, # Calls the executeMenu function
@@ -51,7 +50,7 @@ class Menus:
     # Users Menu, to operate users
     def usersMenu(self):
         # Runs the users_menu object print_menu method and gets the returned index
-        index = self.menu_list['users_menu'].print_menu('Select an option:')
+        index = self.menu_list['users_menu'].print_menu('Select an option:\n')
         menu_actions = [ # Creates a list with the actions to perform acording to index
             UserManager(self.usfile).select_user, # Calls the select_user method from the UserManager class
             UserManager(self.usfile).delete_user # Calls the delete_user method from the UserManager class
@@ -66,32 +65,51 @@ class Menus:
             userSelection_menu = MenuManager(actions)
 
             # Runs the temporal menu object print_menu method and gets the returned index
-            user = userSelection_menu.print_menu('Select a user:')
+            user = userSelection_menu.print_menu('Select a user:\n')
             menu_actions[index - 1](user) # Calls the action in the specified index
 
     # Create Menu, to create installations
     def createMenu(self):
-        # Runs the users_menu object print_menu method and gets the returned index
-        index = self.menu_list['create_menu'].print_menu('Select an MC Loader:\n')
-        menu_actions = [ # Creates a list with the actions to perform according to index
-            MLL.utils.get_version_list, # Gets the minecraft versions
-            MLL.forge.list_forge_versions, # Gets the forge versions
-            MLL.fabric.get_stable_minecraft_versions, # Gets the fabric versions
-            MLL.quilt.get_stable_minecraft_versions # Gets the quilt versions
-        ]
-        forks = menu_actions[index]() # Set forks as the action acording to the index
-        version_to_install = self.select_versionId(index, forks) # Gets the version to install
-        if self.install_version(index, version_to_install): # Checks if the version need to be installed
+        # Checks if the user has internet connection
+        if SystemFunctions().get_internetConnection():
 
-            # Creates a list with all the installation methods acording to each loader
-            install_method = [
-                MLL.install.install_minecraft_version, # Installs vanilla minecraft version
-                MLL.forge.install_forge_version, # Installs forge minecraft version
-                MLL.fabric.install_fabric, # Installs fabric minecraft version
-                MLL.quilt.install_quilt # Installs quit minecraft version
+            # Runs the users_menu object print_menu method and gets the returned index
+            index = self.menu_list['create_menu'].print_menu('Select an MC Loader:\n')
+            menu_actions = [ # Creates a list with the actions to perform according to index
+                MLL.utils.get_version_list(), # Gets the minecraft versions
+                MLL.forge.list_forge_versions(), # Gets the forge versions
+                MLL.fabric.get_stable_minecraft_versions(), # Gets the fabric versions
+                MLL.quilt.get_stable_minecraft_versions(), # Gets the quilt versions
+                MLL.utils.get_installed_versions(launcher_path) # Gets the versions all ready installed
             ]
-            # Installs the version with the required method
-            install_method[index](version_to_install, launcher_path)
+            # Checks if the user has a connection and if he didnt selected using cutsom installation
+
+            forks = menu_actions[index] # Set forks as the action acording to the index
+
+        else:
+            # Index will be the same as for the option 4 when having an internet connection
+            index = 4
+            # Forks must be already installed versions because of lack of internet connection
+            forks = MLL.utils.get_installed_versions(launcher_path)
+
+        version_to_install = self.select_versionId(index, forks) # Gets the version to install
+
+        # Check if the index is not 4 and if the user has internet connection
+        if index != 4:
+
+            # After that checks if the version needs to be installed 
+            # Dont use 'if and' with the two clauses in order to be more efficient
+            if self.install_version(index, version_to_install):
+
+                # Creates a list with all the installation methods acording to each loader
+                install_method = [
+                    MLL.install.install_minecraft_version, # Installs vanilla minecraft version
+                    MLL.forge.install_forge_version, # Installs forge minecraft version
+                    MLL.fabric.install_fabric, # Installs fabric minecraft version
+                    MLL.quilt.install_quilt # Installs quit minecraft version
+                ]
+                # Installs the version with the required method
+                install_method[index](version_to_install, launcher_path)
 
         # Gets the parameters of the using an object from the class InstallationParameterMenu
         parameters = InstallationParameters(True, index, version_to_install)
@@ -109,8 +127,8 @@ class Menus:
 
             for fork in forks: # Iterates through all forks
 
-                # If the loader is vanilla and is a release
-                if MC_LOADER == 0 and fork['type'] == 'release':
+                # If the loader is vanilla or custom and is a release
+                if (MC_LOADER == 0 or MC_LOADER == 4) and fork['type'] == 'release':
                         print(fork['id']) # Prints the releases versions
 
                 elif MC_LOADER == 1: # If the modloader is forge
@@ -125,15 +143,16 @@ class Menus:
 
                             # Sets the last forge version as the actual forge verison
                             last_forge_version = forge_version
-                elif 1 < MC_LOADER:
+
+                elif 1 < MC_LOADER > 4: # If the modloader is fabric or quilt
                     print(fork) # Prints the version
 
-            version_to_install = input('Select a version: ') # Asks for an input
+            version_to_install = input('\nSelect a version: ') # Asks for an input
 
             for fork in forks: # Iterates through all the forks
 
-                # Checks if the loader is vanilla and if the fork matches the input
-                if MC_LOADER == 0 and fork['id'] == version_to_install:
+                # Checks if the loader is vanilla or custom and if the fork matches the input
+                if (MC_LOADER == 0 or MC_LOADER == 4) and fork['id'] == version_to_install:
                     version_exists = True # Versions exist
                     break # Break for the loop
 
@@ -148,7 +167,9 @@ class Menus:
     def install_version(self,MC_LOADER,version_to_install):
 
         # creates a versionId object with the class InstallationParameterMenu using the method get_versionId
-        versionId = InstallationParameters(mc_loader = MC_LOADER, version_to_install = version_to_install).get_versionId()
+        versionId = InstallationParameters(
+            mc_loader = MC_LOADER, version_to_install = version_to_install
+            ).get_versionId()
 
         # Returns False if the version already exists and True if its not already installed
         return not any(i['id'] == versionId for i in MLL.utils.get_installed_versions(launcher_path))
@@ -174,7 +195,7 @@ class Menus:
             InstallationManager(self.instfile).delete_installation # Used to delete the selected installation
         ]
         # Runs the instalations_menu object print_menu method and gets the returned index
-        index = self.menu_list['installation_menu'].print_menu('Select an option:')
+        index = self.menu_list['installation_menu'].print_menu('Select an option:\n')
         options[index](installation) # Runs the option acording to the index
 
     # Select Installation Menu, for selecting installations
@@ -192,7 +213,7 @@ class Menus:
         selectInstalation_menu = MenuManager(actions)
 
         # Returns the index value returned by the print_menu method of the temporal menu object
-        return selectInstalation_menu.print_menu('\nSelect a installation: ')
+        return selectInstalation_menu.print_menu('Select a installation:\n')
 
     # ExecuteInstallation, executes the installation
     def executeInstallation(self, installation):
