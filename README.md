@@ -12,13 +12,16 @@ PyLauncher doesn't have a GUI (yet) so it's not compiles
 
 * Managing multiple users
 * Managing multiple instances with:
+
   * Custom Routes
   * Custom Ram ammount
 * Playing custom versions and modpacks:
+
   * Built-in Forge
   * Built-in Fabric
   * Built-in Quilt
   * Support for external loaders
+  * Support for .mrpack ModPacks
 
 ## :arrow_down: Instalation
 
@@ -32,13 +35,14 @@ Now just by running the `Run.bat` file you'll be able to play Minecraft for Free
 
 ## :loudspeaker: Anouncements
 
-First release!!
+**NEW VERSION RELEASE!!!**
 
-Version 0.1 comes with no GUI but with many functionalities attached to it.
+Version 0.2 realse as a bugfix and a content update.
+This version fixes the connection error by making unable the user to install new versions and only using versions all ready installed by the user. This version also adds the ability to use custom Mod Loaders by installing them and then creating a installations with all ready installed versions and the ability to install Mod Packs via .mrpack files which can be downloaded from the [Modrinth](https://modrinth.com) page.
 
 ## Working On
 
-Im working on a .mrpack importing system and having predefined versions as well as fixing the [known issues](#-:open_file_folder:-Known-issues), but remember if you find another issue, you can report it to the team on the Issues page of the Github repo.
+Im on having predefined versions as well as fixing the [known issues](#-:open_file_folder:-Known-issues), but remember if you find another issue, you can report it to the team on the Issues page of the Github repo.
 
 Further in the future im looking forward to implementing a GUI for a more user friendly app.
 
