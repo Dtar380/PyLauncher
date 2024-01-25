@@ -39,7 +39,8 @@ menus = {
         'Forge',
         'Fabric',
         'Quilt',
-        'Installed'
+        'Installed',
+        'Mod Pack'
     ],
     "installation": [
         'Execute Installation',

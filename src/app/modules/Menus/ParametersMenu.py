@@ -139,7 +139,7 @@ class InstallationParameters:
 
     # Defines get_versionId function
     def get_versionId(self):
-        if self.mc_loader == 0 or self.mc_loader == 4: # Checks if the mc_loader is 0 or 4
+        if self.mc_loader == 0 or self.mc_loader >= 4: # Checks if the mc_loader is equal to 4 or higher
             versionId = self.version_to_install # Creates the value for versionId to match the file of the version isntalled
 
         if self.mc_loader == 1: # Checks if the mc_loader is 1

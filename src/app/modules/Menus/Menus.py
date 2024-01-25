@@ -80,7 +80,8 @@ class Menus:
                 MLL.forge.list_forge_versions(), # Gets the forge versions
                 MLL.fabric.get_stable_minecraft_versions(), # Gets the fabric versions
                 MLL.quilt.get_stable_minecraft_versions(), # Gets the quilt versions
-                MLL.utils.get_installed_versions(launcher_path) # Gets the versions all ready installed
+                MLL.utils.get_installed_versions(launcher_path), # Gets the versions all ready installed
+                self.getMrpack()
             ]
             # Checks if the user has a connection and if he didnt selected using cutsom installation
 
@@ -92,10 +93,14 @@ class Menus:
             # Forks must be already installed versions because of lack of internet connection
             forks = MLL.utils.get_installed_versions(launcher_path)
 
-        version_to_install = self.select_versionId(index, forks) # Gets the version to install
+        if index == 5: # If the index is 5 (mrpack)
+            version_to_install = forks[1] # Gets the version to install with the .mrpack file
 
-        # Check if the index is not 4 and if the user has internet connection
-        if index != 4:
+        else: # If index is not 5 (mrpacks)
+            version_to_install = self.select_versionId(index, forks) # Gets the version to install
+
+        # Check if the index is lower than 4
+        if index < 4:
 
             # After that checks if the version needs to be installed 
             # Dont use 'if and' with the two clauses in order to be more efficient
@@ -113,7 +118,14 @@ class Menus:
 
         # Gets the parameters of the using an object from the class InstallationParameterMenu
         parameters = InstallationParameters(True, index, version_to_install)
-        
+
+        if index == 5: # Checks if the index is not 5 (mrpacks)
+            SystemFunctions().clear() # Clears the consol
+
+            # Installs the mrpack version on the launcher pack and if there was a selected gameDir
+            # Installs the mods and configs on the specified dierectory
+            MLL.mrpack.install_mrpack(forks[0], launcher_path, parameters.parameters[1])
+
         # Uses the create_installation method form InstallationManager passing the parameters as arguments
         InstallationManager(self.instfile).create_installation(*parameters.parameters)
 
@@ -173,6 +185,22 @@ class Menus:
 
         # Returns False if the version already exists and True if its not already installed
         return not any(i['id'] == versionId for i in MLL.utils.get_installed_versions(launcher_path))
+
+    # InstallModPack, for installing .mrpack files
+    def getMrpack(self):
+        while True: # Infinite loop
+            SystemFunctions().clear() # Clears the consol
+
+            # Asks the user to input the path to the .mrpack file
+            file_path = input('Enter the path to the .mrpack file:\n')
+
+            if exists(file_path) and '.mrpack' in file_path: # If the file exists and if its a .mrpack file
+                # Gets the minecraft loader and version of the modpack
+                version_to_install = MLL.mrpack.get_mrpack_launch_version(file_path)
+                return [file_path, version_to_install] # Returns the file path
+            
+            else:
+                print('\nFile was not found or is not an .mrpack file\n') # Gives an error
 
     # Execute Menu, for executing installations
     def executeMenu(self):
