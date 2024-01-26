@@ -52,7 +52,7 @@ I will upload a video on the 31 of January on my channel about the PyLauncher pr
 
 ## :open_file_folder: Known issues
 
-The program when creating an installation passes directly to the .mrpack creation, Im going to fix it for the 0.2.1
+No issues detected when running the code, but remember, if you find one, report it in `Issues`
 
 ## :scroll: License
 
