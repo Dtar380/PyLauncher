@@ -76,16 +76,15 @@ class Menus:
             # Runs the users_menu object print_menu method and gets the returned index
             index = self.menu_list['create_menu'].print_menu('Select an MC Loader:\n')
             menu_actions = [ # Creates a list with the actions to perform according to index
-                MLL.utils.get_version_list(), # Gets the minecraft versions
-                MLL.forge.list_forge_versions(), # Gets the forge versions
-                MLL.fabric.get_stable_minecraft_versions(), # Gets the fabric versions
-                MLL.quilt.get_stable_minecraft_versions(), # Gets the quilt versions
-                MLL.utils.get_installed_versions(launcher_path), # Gets the versions all ready installed
-                self.getMrpack()
+                lambda: MLL.utils.get_version_list(), # Gets the minecraft versions
+                lambda: MLL.forge.list_forge_versions(), # Gets the forge versions
+                lambda: MLL.fabric.get_stable_minecraft_versions(), # Gets the fabric versions
+                lambda: MLL.quilt.get_stable_minecraft_versions(), # Gets the quilt versions
+                lambda: MLL.utils.get_installed_versions(launcher_path), # Gets the versions all ready installed
+                lambda: self.getMrpack(),
             ]
-            # Checks if the user has a connection and if he didnt selected using cutsom installation
-
-            forks = menu_actions[index] # Set forks as the action acording to the index
+            function = menu_actions[index] # Sets the function choosen in the function
+            forks = function() # Set forks with the return of the function choosen
 
         else:
             # Index will be the same as for the option 4 when having an internet connection
