@@ -1,7 +1,0 @@
-@import url(Mobile.css) only screen and (max-width: 600px);
-@import url(Tablet.css) only screen and (min-width: 601px) and (max-width: 900px);
-@import url(Desktop.css) only screen and (min-width: 901px);
-
-.defaultCursor:hover{
-  cursor: default;
-}
