@@ -1,0 +1,389 @@
+/*************************************/
+/** MAIN *****************************/
+/*************************************/
+
+  /*  IMPORTS                        */
+  @import url('https://fonts.googleapis.com/css?family=Rubik:700|Rubik:400');
+  @import url(themes.css);
+
+/*  RESET STYLE                    */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*  FONT STYLE                     */
+:root{
+  font-family: 'Rubik';
+  font-weight: 600;
+  font-size: 65%;
+}
+
+h1 {font-size: 4.2rem;}
+
+h2 {font-size: 3.6rem;}
+
+h3 {font-size: 2.8rem;}
+
+h4 {font-size: 2.1rem;}
+
+h5 {font-size: 1.4rem;}
+
+small {font-size: 0.7rem;}
+
+/*************************************/
+/** MOBILE ***************************/
+/*************************************/
+
+  body{
+    width: 100%;
+    background-color: var(--background);
+    color: var(--text);
+  }
+
+/*********************************/
+/*  HEADER                       */
+/*********************************/
+
+  /*  HEADER STYLE               */
+  .header {
+    background-color: var(--primary);
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .header h5 {
+    color: var(--text);
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  /*  LOGO AND TEXT              */
+  .logo{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.6rem;
+  }
+
+  .logo img{
+    height: 100%;
+    margin-right: 5px;
+  }
+  
+  /*  NAVBAR                     */
+  .navbar {
+    display: none;
+  }
+
+  #navSelector i:hover{
+    cursor: pointer;
+  }
+
+  .hamburguerNav{
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10%;
+    justify-content: left;
+    flex-direction: column;
+    background-color: var(--secondary);
+    z-index: 111;
+    transition: .25s;
+  }
+
+  .hamburguerNav a{
+    margin-top: 10%;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .hamburguerNav.visible{
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /*  LIGHT/DARK THEME SWITCH    */
+  .switch{
+    padding-right: 0.5%;
+    padding-top: 0.15%;
+  }
+
+  #switch{
+    width: 100%;
+  }
+
+  #switch::before{
+    border: solid 2px var(--secondary);
+    border-radius: 50%;
+    padding: 35%;
+  }
+
+  #switch:hover::before{
+    cursor: pointer;
+    background-color: var(--darkener);
+  }
+
+/*********************************/
+/*  MAIN CONTENT                 */
+/*********************************/
+
+  .main {
+    width: 100%;
+  }
+
+  /*  LEFT/RIGHT DISPLAY         */
+  .doble{
+    width: 75%;
+    padding-top: 15%;
+    padding-bottom: 10%;
+    margin: auto;
+  }
+
+  .left {
+    text-align: center;
+  }
+
+  .left h4{
+    padding-bottom: 5%;
+  }
+
+  .left p{
+    padding-bottom: 5%;
+    font-weight: 100;
+  }
+
+  .left div{
+    margin: auto;
+  }
+
+  .right{
+    display: none;
+  }
+
+  /*  GRID DISPLAY               */
+  .grid{
+    padding-top: 10%;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid h4 {
+    text-align: center;
+  }
+  
+  .grid h5{
+    text-align: center;
+  }
+
+  .grid a{
+    text-decoration: none;
+    color: var(--text);
+  }
+  
+  #one,#two,#three{
+    margin-top: 10%;
+    border-radius: 10px;
+    background-color: var(--primary);
+    padding: 10%;
+    width: 100%;
+  }
+
+  #one h5,#two h5,#three h5{
+    padding-bottom: 5%;
+  }
+
+  #one p,#two p,#three p{
+    width: 100%;
+    font-weight: 100;
+    inline-size: 90%;
+    line-height: 1.4rem;
+    width: fit-content;
+    padding-bottom: 10%;
+  }
+
+  #one img,#two img,#three img{
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 5px 5px var(--shadow);
+  }
+
+  #one{
+    grid-column: 1/2;
+    transition: 0.25s;
+  }
+
+  #two{
+    grid-column: 2/3;
+    transition: 0.25s;
+  }
+
+  #three{
+    grid-column: 3/4;
+    transition: 0.25s;
+  }
+
+  #one:hover,#two:hover,#three:hover{
+    margin-top: 9%;
+    margin-bottom: 1%;
+    transition: 0.25s;
+    box-shadow: 6px 6px var(--accent);
+  }
+
+  .blog h5{
+    padding-top: 10%;
+  }
+
+  .readmore{
+    text-align: left;
+    position: relative;
+    visibility: hidden;
+    color: blue;
+    bottom: 0;
+    left: 0;
+  }
+
+  .blog:hover{
+    & .readmore{
+      visibility: visible;
+    }
+  }
+
+  /* CENTERED                    */
+  .centered {
+    padding-top: 15%;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .centered h4 {
+    padding-bottom: 5%;
+  }
+
+  .centered div {
+    width: 10rem;
+    position: relative;
+    margin: auto;
+  }
+
+/*********************************/
+/*  FOOTER                       */
+/*********************************/
+
+  .footer {
+    background-color: var(--primary);
+    width: 100%;
+    margin-top: 15%;
+  }
+
+  .footer h5 {
+    color: var(--text);
+  }
+
+  .content {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 90%;
+    padding: 15px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+    border-bottom: solid 2px var(--darkener);
+  }
+
+  #logo-footer{
+    margin: auto;
+  }
+
+  .socials{
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .socials a {
+    text-decoration: none;
+    padding-top: 10%;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .socials a:hover {
+    cursor: pointer;
+    filter: brightness(var(--hover-brightness));
+  }
+
+  .links {
+    text-align: center;
+    padding-top: 15%;
+    width: fit-content;
+    margin: auto;
+  }
+
+  .links ul{
+    list-style-type: none;
+    font-weight: 90;
+    padding-top: 20%;
+  }
+
+  .links li{
+    padding-top: 10%;
+    padding-bottom: 10%;
+  }
+
+  .links a{
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .copyright {
+    width: 100%;
+    background-color: var(--secondary);
+    padding: 0.5% 0;
+    margin: auto;
+    text-align: center;
+    font-weight: 1;
+  }
+
+/*********************************/
+/*  DOWNLOAD BUTTON              */
+/*********************************/
+
+  .download{
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    background: linear-gradient(120deg, var(--dark-accent) -10%, var(--accent) 110%);
+    box-shadow: 3px 3px var(--shadow);
+    color: #ebebf5;
+    transition: 0.25s;
+  }
+
+  .button{
+    width: 10rem;
+  }
