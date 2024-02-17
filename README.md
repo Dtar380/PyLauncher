@@ -13,19 +13,19 @@ PyLauncher doesn't have a GUI (yet) so it's not compiles
 * Managing multiple users
 * Managing multiple instances with:
 
-  * Custom Routes
-  * Custom Ram ammount
+ * Custom Routes
+ * Custom Ram amount
 * Playing custom versions and modpacks:
 
-  * Built-in Forge
-  * Built-in Fabric
-  * Built-in Quilt
-  * Support for external loaders
-  * Support for .mrpack ModPacks
+ * Built-in Forge
+ * Built-in Fabric
+ * Built-in Quilt
+ * Support for external loaders
+ * Support for .mrpack ModPacks
 
-## :arrow_down: Instalation
+## :arrow_down: Installation
 
-The instalation proccess is simple:
+The installation process is simple:
 
 1. Download python 3.12.1 and install
 2. Download the repo
@@ -33,11 +33,11 @@ The instalation proccess is simple:
 
 Now just by running the `Run.bat` file you'll be able to play Minecraft for Free!
 
-## :loudspeaker: Anouncements
+## :loudspeaker: Announcements
 
 **NEW VERSION RELEASE!!!**
 
-Version 0.2 realse as a bugfix and a content update.
+Version 0.2 release as a bugfix and a content update.
 This version fixes the connection error by making unable the user to install new versions and only using versions all ready installed by the user. This version also adds the ability to use custom Mod Loaders by installing them and then creating a installations with all ready installed versions and the ability to install Mod Packs via .mrpack files which can be downloaded from the [Modrinth](https://modrinth.com) page.
 
 ## Working On
@@ -46,9 +46,9 @@ Im on having predefined versions as well as fixing the [known issues](#-:open_fi
 
 Further in the future im looking forward to implementing a GUI for a more user friendly app.
 
-## :vhs: Whatch the YT video (Spanish)
+## :vhs: Watch the YT video (Spanish)
 
-I will upload a video on the 31 of January on my channel about the PyLauncher proyect and a tutorial. But as Im native Spanish speaker and my channel content is full in Spanish I will not change for this video.
+I will upload a video on the 31 of January on my channel about the PyLauncher project and a tutorial. But as Im native Spanish speaker and my channel content is full in Spanish I will not change for this video.
 
 ## :open_file_folder: Known issues
 
@@ -58,8 +58,8 @@ No issues detected when running the code, but remember, if you find one, report 
 
 PyLauncher is distributed under the license GNU GPL 3.0.
 
-See the [LICENSE](LICENSE) file for more information.
+See the [LICENSE](./license.html) file for more information.
 
-## :moneybag: Sponsor This Proyect
+## :moneybag: Sponsor This Project
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H4TBMEZ)
